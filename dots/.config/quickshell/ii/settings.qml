@@ -55,6 +55,11 @@ ApplicationWindow {
             component: "modules/settings/ServicesConfig.qml"
         },
         {
+            name: Translation.tr("Recording"),
+            icon: "screen_record",
+            component: "modules/settings/RecordingConfig.qml"
+        },
+        {
             name: Translation.tr("Advanced"),
             icon: "construction",
             component: "modules/settings/AdvancedConfig.qml"

@@ -114,8 +114,8 @@ Singleton {
                     property bool clickthrough: false
                     property real x: 80
                     property real y: 80
-                    property real width: 350
-                    property real height: 130
+                    property real width: 360
+                    property real height: 180
                 }
                 property JsonObject resources: JsonObject {
                     property bool pinned: false
