@@ -31,10 +31,21 @@ ContentPage {
         }
         ConfigSwitch {
             buttonIcon: "terminal"
-            text: Translation.tr("Terminal")
+            text: Translation.tr("Terminal (global)")
             checked: Config.options.appearance.wallpaperTheming.enableTerminal
             onCheckedChanged: {
                 Config.options.appearance.wallpaperTheming.enableTerminal = checked;
+            }
+            StyledToolTip {
+                text: Translation.tr("Shell & utilities theming must also be enabled")
+            }
+        }
+        ConfigSwitch {
+            buttonIcon: "apps"
+            text: Translation.tr("Terminal apps (kitty)")
+            checked: Config.options.appearance.wallpaperTheming.enableTerminalApps
+            onCheckedChanged: {
+                Config.options.appearance.wallpaperTheming.enableTerminalApps = checked;
             }
             StyledToolTip {
                 text: Translation.tr("Shell & utilities theming must also be enabled")
@@ -50,7 +61,7 @@ ContentPage {
                      Config.options.appearance.wallpaperTheming.terminalGenerationProps.forceDarkMode= checked;
                 }
                 StyledToolTip {
-                    text: Translation.tr("Ignored if terminal theming is not enabled")
+                    text: Translation.tr("Ignored if terminal theming is disabled")
                 }
             }
         }

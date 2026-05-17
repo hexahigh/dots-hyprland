@@ -11,6 +11,8 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 term_alpha=100 #Set this to < 100 make all your terminals transparent
 # sleep 0 # idk i wanted some delay or colors dont get applied properly
+enable_terminal_global="true"
+enable_terminal_apps="true"
 if [ ! -d "$STATE_DIR"/user/generated ]; then
   mkdir -p "$STATE_DIR"/user/generated
 fi
@@ -74,15 +76,23 @@ apply_anyterm() {
 }
 
 apply_term() {
-  apply_anyterm &
-  apply_kitty &
+  if [ "$enable_terminal_global" = "true" ]; then
+    apply_anyterm &
+  fi
+  if [ "$enable_terminal_apps" = "true" ]; then
+    apply_kitty &
+  fi
 }
 
 # Check if terminal theming is enabled in config
 CONFIG_FILE="$XDG_CONFIG_HOME/illogical-impulse/config.json"
 if [ -f "$CONFIG_FILE" ]; then
-  enable_terminal=$(jq -r '.appearance.wallpaperTheming.enableTerminal' "$CONFIG_FILE")
-  if [ "$enable_terminal" = "true" ]; then
+  enable_terminal_global=$(jq -r '.appearance.wallpaperTheming.enableTerminal // "true"' "$CONFIG_FILE")
+  enable_terminal_apps=$(jq -r '.appearance.wallpaperTheming.enableTerminalApps // "null"' "$CONFIG_FILE")
+  if [ "$enable_terminal_apps" = "null" ] || [ -z "$enable_terminal_apps" ]; then
+    enable_terminal_apps="$enable_terminal_global"
+  fi
+  if [ "$enable_terminal_global" = "true" ] || [ "$enable_terminal_apps" = "true" ]; then
     apply_term &
   fi
 else
