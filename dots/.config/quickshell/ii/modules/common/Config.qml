@@ -222,6 +222,7 @@ Singleton {
                     property bool enableSidebar: false
                     property real widgetsFactor: 1.2
                 }
+                property string onChange: ""
             }
 
             property JsonObject bar: JsonObject {

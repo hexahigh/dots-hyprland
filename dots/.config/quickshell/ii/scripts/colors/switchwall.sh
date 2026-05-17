@@ -57,6 +57,13 @@ post_process() {
 
     handle_kde_material_you_colors &
     "$SCRIPT_DIR/code/material-code-set-color.sh" &
+
+    if [ -f "$SHELL_CONFIG_FILE" ]; then
+        onChangeCmd=$(jq -r '.background.onChange' "$SHELL_CONFIG_FILE")
+        if [[ -n "$onChangeCmd" && "$onChangeCmd" != "null" ]]; then
+            eval "$onChangeCmd" &
+        fi
+    fi
 }
 
 check_and_prompt_upscale() {

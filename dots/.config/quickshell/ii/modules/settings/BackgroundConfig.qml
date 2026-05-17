@@ -614,4 +614,23 @@ ContentPage {
             }
         }
     }
+
+    ContentSection {
+        icon: "construction"
+        title: Translation.tr("Advanced")
+
+        ContentSubsection {
+            title: Translation.tr("Run command on wallpaper change")
+
+            MaterialTextArea {
+                Layout.fillWidth: true
+                placeholderText: "shell command"
+                text: Config.options.background.onChange
+                wrapMode: TextEdit.Wrap
+                onTextChanged: {
+                    Config.options.background.onChange = text;
+                }
+            }
+        }
+    }
 }
