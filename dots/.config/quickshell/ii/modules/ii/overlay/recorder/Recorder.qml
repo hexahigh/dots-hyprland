@@ -79,7 +79,6 @@ StyledOverlayWidget {
                     toggled: GpuScreenRecorder.replayActive
                     enabled: GpuScreenRecorder.available && root.replayBufferSeconds >= 2
                     onClicked: {
-                        GlobalStates.overlayOpen = false;
                         GpuScreenRecorder.toggleReplay();
                     }
                 }
