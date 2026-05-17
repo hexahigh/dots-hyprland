@@ -632,5 +632,15 @@ ContentPage {
                 }
             }
         }
+
+        ConfigSwitch {
+            Layout.fillWidth: true
+            buttonIcon: "check"
+            text: Translation.tr("Upscale notification")
+            checked: Config.options.background.promptUpscale
+            onCheckedChanged: {
+                Config.options.background.promptUpscale = checked;
+            }
+        }
     }
 }

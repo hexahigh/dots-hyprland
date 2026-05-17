@@ -71,6 +71,11 @@ check_and_prompt_upscale() {
     min_width_desired="$(hyprctl monitors -j | jq '([.[].width] | max)' | xargs)" # max monitor width
     min_height_desired="$(hyprctl monitors -j | jq '([.[].height] | max)' | xargs)" # max monitor height
 
+    wantsPrompt=$(jq -r '.background.promptUpscale' "$SHELL_CONFIG_FILE")
+    if [[ "$wantsPrompt" != "true" ]]; then
+        return
+    fi
+
     if command -v identify &>/dev/null && [ -f "$img" ]; then
         local img_width img_height
         if is_video "$img"; then # Not check resolution for videos, just let em pass

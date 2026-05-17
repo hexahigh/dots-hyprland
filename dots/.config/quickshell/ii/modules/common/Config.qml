@@ -223,6 +223,7 @@ Singleton {
                     property real widgetsFactor: 1.2
                 }
                 property string onChange: ""
+                property bool promptUpscale: false
             }
 
             property JsonObject bar: JsonObject {
