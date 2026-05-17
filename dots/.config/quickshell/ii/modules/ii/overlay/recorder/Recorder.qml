@@ -11,7 +11,7 @@ import qs.modules.ii.overlay
 StyledOverlayWidget {
     id: root
     minimumWidth: 340
-    minimumHeight: 180
+    minimumHeight: 200
 
     property int replayBufferSeconds: Config.options.recording.gpuScreenRecorder.replaySeconds
 
