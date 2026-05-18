@@ -214,6 +214,14 @@ Singleton {
                         property real x: 400
                         property real y: 100
                     }
+                    property JsonObject chineseWord: JsonObject {
+                        property bool enable: false
+                        property string placementStrategy: "free" // "free", "leastBusy", "mostBusy"
+                        property real x: 260
+                        property real y: 220
+                        property string fontFamily: ""
+                        property int refreshIntervalHours: 24
+                    }
                 }
                 property string wallpaperPath: ""
                 property string thumbnailPath: ""

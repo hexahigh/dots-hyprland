@@ -616,6 +616,62 @@ ContentPage {
     }
 
     ContentSection {
+        icon: "translate"
+        title: Translation.tr("Widget: Daily Chinese Word")
+
+        ConfigRow {
+            Layout.fillWidth: true
+
+            ConfigSwitch {
+                Layout.fillWidth: false
+                buttonIcon: "check"
+                text: Translation.tr("Enable")
+                checked: Config.options.background.widgets.chineseWord.enable
+                onCheckedChanged: {
+                    Config.options.background.widgets.chineseWord.enable = checked;
+                }
+            }
+            Item {
+                Layout.fillWidth: true
+            }
+            ConfigSelectionArray {
+                Layout.fillWidth: false
+                currentValue: Config.options.background.widgets.chineseWord.placementStrategy
+                onSelected: newValue => {
+                    Config.options.background.widgets.chineseWord.placementStrategy = newValue;
+                }
+                options: [
+                    {
+                        displayName: Translation.tr("Draggable"),
+                        icon: "drag_pan",
+                        value: "free"
+                    },
+                    {
+                        displayName: Translation.tr("Least busy"),
+                        icon: "category",
+                        value: "leastBusy"
+                    },
+                    {
+                        displayName: Translation.tr("Most busy"),
+                        icon: "shapes",
+                        value: "mostBusy"
+                    },
+                ]
+            }
+        }
+
+        MaterialTextArea {
+            Layout.fillWidth: true
+            placeholderText: Translation.tr("Font family (optional)")
+            text: Config.options.background.widgets.chineseWord.fontFamily
+            wrapMode: TextEdit.Wrap
+            onTextChanged: {
+                Config.options.background.widgets.chineseWord.fontFamily = text;
+            }
+        }
+    }
+
+    ContentSection {
         icon: "construction"
         title: Translation.tr("Advanced")
 

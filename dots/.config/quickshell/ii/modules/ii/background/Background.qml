@@ -16,6 +16,7 @@ import Quickshell.Hyprland
 
 import qs.modules.ii.background.widgets
 import qs.modules.ii.background.widgets.clock
+import qs.modules.ii.background.widgets.chineseWord
 import qs.modules.ii.background.widgets.weather
 
 Variants {
@@ -170,14 +171,14 @@ Variants {
                         // Center the picture
                         return (bgRoot.screen.width - width) / 2;
                     }
-                    return - bgRoot.parallaxTotalPixelsX * usedFractionX;
+                    return -bgRoot.parallaxTotalPixelsX * usedFractionX;
                 }
                 y: {
                     if (bgRoot.screen.height > height) {
                         // Center the picture
                         return (bgRoot.screen.height - height) / 2;
                     }
-                    return - bgRoot.parallaxTotalPixelsY * usedFractionY;
+                    return -bgRoot.parallaxTotalPixelsY * usedFractionY;
                 }
 
                 source: bgRoot.wallpaperSafetyTriggered ? "" : bgRoot.wallpaperPath
@@ -257,6 +258,17 @@ Variants {
                 FadeLoader {
                     shown: Config.options.background.widgets.weather.enable
                     sourceComponent: WeatherWidget {
+                        screenWidth: bgRoot.screen.width
+                        screenHeight: bgRoot.screen.height
+                        scaledScreenWidth: bgRoot.screen.width
+                        scaledScreenHeight: bgRoot.screen.height
+                        wallpaperScale: 1
+                    }
+                }
+
+                FadeLoader {
+                    shown: Config.options.background.widgets.chineseWord.enable
+                    sourceComponent: ChineseWordWidget {
                         screenWidth: bgRoot.screen.width
                         screenHeight: bgRoot.screen.height
                         scaledScreenWidth: bgRoot.screen.width
