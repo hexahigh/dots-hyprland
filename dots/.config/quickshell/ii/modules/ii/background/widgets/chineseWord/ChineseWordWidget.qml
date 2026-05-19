@@ -50,6 +50,20 @@ AbstractBackgroundWidget {
             }
 
             StyledText {
+                text: DailyChineseWord.data.pinyin
+                color: Appearance.colors.colOnPrimaryContainer
+                opacity: text.length > 0 ? 0.7 : 0
+                horizontalAlignment: Text.AlignHCenter
+                wrapMode: Text.Wrap
+                width: parent.width
+                font {
+                    family: wordFontFamily.length > 0 ? wordFontFamily : Appearance.font.family.reading
+                    pixelSize: 18
+                    weight: Font.Medium
+                }
+            }
+
+            StyledText {
                 text: DailyChineseWord.data.english
                 color: Appearance.colors.colOnPrimaryContainer
                 opacity: text.length > 0 ? 0.8 : 0
