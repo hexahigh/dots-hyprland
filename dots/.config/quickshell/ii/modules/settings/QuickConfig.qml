@@ -67,7 +67,7 @@ ContentPage {
             Item {
                 implicitWidth: 340
                 implicitHeight: 200
-                
+
                 StyledImage {
                     id: wallpaperPreview
                     anchors.fill: parent
@@ -174,7 +174,7 @@ ContentPage {
             currentValue: Config.options.appearance.palette.type
             onSelected: newValue => {
                 Config.options.appearance.palette.type = newValue;
-                Quickshell.execDetached(["bash", "-c", `${Directories.wallpaperSwitchScriptPath} --noswitch`]);
+                Quickshell.execDetached([Directories.wallpaperSwitchScriptPath, "--noswitch", "--type", newValue]);
             }
             options: [
                 {
@@ -320,7 +320,6 @@ ContentPage {
                     ]
                 }
             }
-            
         }
     }
 
@@ -339,7 +338,7 @@ ContentPage {
             materialIcon: justCopied ? "check" : "content_copy"
             mainText: justCopied ? Translation.tr("Path copied") : Translation.tr("Copy path")
             onClicked: {
-                copyPathButton.justCopied = true
+                copyPathButton.justCopied = true;
                 Quickshell.clipboardText = FileUtils.trimFileProtocol(`${Directories.config}/illogical-impulse/config.json`);
                 revertTextTimer.restart();
             }
@@ -351,7 +350,7 @@ ContentPage {
                 id: revertTextTimer
                 interval: 1500
                 onTriggered: {
-                    copyPathButton.justCopied = false
+                    copyPathButton.justCopied = false;
                 }
             }
         }
