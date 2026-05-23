@@ -12,6 +12,7 @@ Singleton {
 
     readonly property string vocabPath: FileUtils.trimFileProtocol(`${Directories.assetsPath}/data/chinese_vocab_list.json`)
     readonly property int refreshIntervalMs: Math.max(1, Config.options.background.widgets.chineseWord.refreshIntervalHours) * 60 * 60 * 1000
+    readonly property int pollIntervalMs: Math.min(refreshIntervalMs, 60 * 60 * 1000)
     readonly property bool enabled: Config.options.background.widgets.chineseWord.enable
 
     property var vocabList: []
@@ -25,6 +26,33 @@ Singleton {
 
     function currentDate() {
         return DateTime.clock?.date ?? new Date();
+    }
+
+    function dateKey(date) {
+        const year = String(date.getFullYear());
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+        const day = String(date.getDate()).padStart(2, "0");
+        return `${year}-${month}-${day}`;
+    }
+
+    function seedFromDate(date) {
+        const key = dateKey(date);
+        let seed = 2166136261;
+        for (let i = 0; i < key.length; i++) {
+            seed ^= key.charCodeAt(i);
+            seed = Math.imul(seed, 16777619);
+        }
+        return seed >>> 0;
+    }
+
+    function seededIndex(seed, length) {
+        if (length <= 0)
+            return 0;
+        let value = seed >>> 0;
+        value ^= value << 13;
+        value ^= value >>> 17;
+        value ^= value << 5;
+        return (value >>> 0) % length;
     }
 
     function dayOfYear(date) {
@@ -61,7 +89,7 @@ Singleton {
         if (!root.vocabList || root.vocabList.length === 0)
             return;
         const today = currentDate();
-        const index = dayOfYear(today) % root.vocabList.length;
+        const index = seededIndex(seedFromDate(today), root.vocabList.length);
         const entry = root.vocabList[index] ?? {};
         const chinese = String(entry.simp ?? "").trim();
         const pinyin = String(entry.pinyin ?? "").trim();
@@ -119,7 +147,7 @@ Singleton {
         id: refreshTimer
         running: root.enabled
         repeat: true
-        interval: refreshIntervalMs
+        interval: root.pollIntervalMs
         triggeredOnStart: root.enabled
         onTriggered: root.selectDailyEntry()
     }
