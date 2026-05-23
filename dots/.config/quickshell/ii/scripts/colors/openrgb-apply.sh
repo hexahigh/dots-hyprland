@@ -34,12 +34,6 @@ if [ ${#device_ids[@]} -eq 0 ]; then
     exit 0
 fi
 
-pids=()
 for device_id in "${device_ids[@]}"; do
-    openrgb --device "$device_id" --mode static --color "$color" >/dev/null 2>&1 &
-    pids+=("$!")
-done
-
-for pid in "${pids[@]}"; do
-    wait "$pid" >/dev/null 2>&1 || true
+    openrgb --device "$device_id" --mode static --color "$color" >/dev/null 2>&1
 done
