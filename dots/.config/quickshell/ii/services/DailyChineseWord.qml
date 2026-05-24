@@ -12,7 +12,7 @@ Singleton {
 
     readonly property string vocabPath: FileUtils.trimFileProtocol(`${Directories.assetsPath}/data/chinese_vocab_list.json`)
     readonly property int refreshIntervalMs: Math.max(1, Config.options.background.widgets.chineseWord.refreshIntervalHours) * 60 * 60 * 1000
-    readonly property int pollIntervalMs: Math.min(refreshIntervalMs, 60 * 60 * 1000)
+    readonly property int pollIntervalMs: Math.min(refreshIntervalMs, 15 * 1000)
     readonly property bool enabled: Config.options.background.widgets.chineseWord.enable
 
     property var vocabList: []
