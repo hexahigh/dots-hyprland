@@ -17,6 +17,7 @@ depends=(
   matugen
   otf-space-grotesk
   starship
+  openrgb
   ttf-jetbrains-mono-nerd
   ttf-material-symbols-variable-git
   ttf-readex-pro
