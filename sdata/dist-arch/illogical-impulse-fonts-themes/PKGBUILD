@@ -23,4 +23,5 @@ depends=(
   ttf-readex-pro
   ttf-rubik-vf
   ttf-twemoji
+  ttf-google-zcoolkuaile
 )

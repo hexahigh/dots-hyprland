@@ -1,6 +1,33 @@
 # This script is meant to be sourced.
 # It's not for directly running.
 
+ensure_arch_font_repo(){
+  local repo_name="arch-font-repo"
+  local repo_key_url="https://afr.080609.xyz/afr.pub.asc"
+  local repo_key_fingerprint="EEB57FEBBBFC5AC1CC48C353B67389CC0D0BDF88"
+  local repo_server="https://afr.080609.xyz/x86_64"
+
+  if ! sudo grep -Eq "^[[:space:]]*\\[${repo_name}\\][[:space:]]*$" /etc/pacman.conf; then
+    local repo_key_file
+    repo_key_file="$(mktemp)"
+    x curl -fsSL -o "$repo_key_file" "$repo_key_url"
+    x sudo pacman-key --add "$repo_key_file"
+    x sudo pacman-key --lsign-key "$repo_key_fingerprint"
+    x rm -f "$repo_key_file"
+    x bash -c "printf '\n[%s]\nSigLevel = Required\nServer = %s\n' '$repo_name' '$repo_server' | sudo tee -a /etc/pacman.conf >/dev/null"
+    return 0
+  fi
+
+  if ! sudo pacman-key --list-keys | grep -q "$repo_key_fingerprint"; then
+    local repo_key_file
+    repo_key_file="$(mktemp)"
+    x curl -fsSL -o "$repo_key_file" "$repo_key_url"
+    x sudo pacman-key --add "$repo_key_file"
+    x sudo pacman-key --lsign-key "$repo_key_fingerprint"
+    x rm -f "$repo_key_file"
+  fi
+}
+
 install-yay(){
   x sudo pacman -S --needed --noconfirm base-devel
   x git clone https://aur.archlinux.org/yay-bin.git /tmp/buildyay
@@ -48,6 +75,9 @@ fi
 if [[ -z "${PACMAN_AUTH:-}" ]]; then
   export PACMAN_AUTH="sudo"
 fi
+
+showfun ensure_arch_font_repo
+v ensure_arch_font_repo
 
 showfun remove_deprecated_dependencies
 v remove_deprecated_dependencies

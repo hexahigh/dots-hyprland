@@ -224,7 +224,7 @@ Singleton {
                         property string placementStrategy: "free" // "free", "leastBusy", "mostBusy"
                         property real x: 260
                         property real y: 220
-                        property string fontFamily: ""
+                        property string fontFamily: "ZCOOL KuaiLe"
                         property int refreshIntervalHours: 24
                     }
                 }
