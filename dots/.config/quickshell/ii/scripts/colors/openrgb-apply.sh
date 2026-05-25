@@ -34,6 +34,9 @@ if [ ${#device_ids[@]} -eq 0 ]; then
     exit 0
 fi
 
+openrgb_args=()
 for device_id in "${device_ids[@]}"; do
-    openrgb --device "$device_id" --mode static --color "$color" >/dev/null 2>&1
+    openrgb_args+=(--device "$device_id" --mode static --color "$color")
 done
+
+openrgb "${openrgb_args[@]}" >/dev/null 2>&1

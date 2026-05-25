@@ -140,6 +140,7 @@ Singleton {
                 }
                 property JsonObject openrgb: JsonObject {
                     property bool enable: false
+                    property bool applyOnStartup: true
                     property list<var> devices: []
                 }
                 property JsonObject palette: JsonObject {
