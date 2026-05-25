@@ -91,6 +91,19 @@ hl.bind("SUPER + ALT + R", hl.dsp.exec_cmd(qsIsAlive .. " || " .. qsScripts .. "
 hl.bind("CTRL + ALT + R", hl.dsp.exec_cmd(qsScripts .. "/videos/record.sh --fullscreen"), { locked = true })
 hl.bind("SUPER + SHIFT + ALT + R", hl.dsp.exec_cmd(qsScripts .. "/videos/record.sh --fullscreen --sound"),
     { locked = true, description = "Utilities: Record screen (with sound)" })
+hl.bind("SUPER + ALT + C", hl.dsp.exec_cmd(qsScripts .. "/videos/gpu-screen-recorder.sh save"),
+    { locked = true, release = true, description = "Utilities: Save full replay" })
+hl.bind("SUPER + ALT + C + 1", hl.dsp.exec_cmd(qsScripts .. "/videos/gpu-screen-recorder.sh save 10"),
+    { locked = true, description = "Utilities: Save 10s replay" })
+hl.bind("SUPER + ALT + C + 2", hl.dsp.exec_cmd(qsScripts .. "/videos/gpu-screen-recorder.sh save 30"),
+    { locked = true, description = "Utilities: Save 30s replay" })
+hl.bind("SUPER + ALT + C + 3", hl.dsp.exec_cmd(qsScripts .. "/videos/gpu-screen-recorder.sh save 60"),
+    { locked = true, description = "Utilities: Save 60s replay" })
+hl.bind("SUPER + ALT + C + 4", hl.dsp.exec_cmd(qsScripts .. "/videos/gpu-screen-recorder.sh save 300"),
+    { locked = true, description = "Utilities: Save 5m replay" })
+hl.bind("SUPER + ALT + C + E",
+    hl.dsp.exec_cmd("losslesscut \"$(" .. qsScripts .. "/videos/get-latest-replay.sh)\""),
+    { locked = true, description = "Utilities: Open latest replay in clip editor" })
 --# Fullscreen screenshot
 local grimhyprctl = "grim -o \"$(hyprctl activeworkspace -j | jq -r '.monitor')\""
 hl.bind("Print", hl.dsp.exec_cmd(grimhyprctl .. " - | wl-copy"),
@@ -229,7 +242,8 @@ for i = 1, 2 do
     local keydirs = { "Up", "Down" }
     local prefix = { "r-", "r+" }
     local descdir = { "left", "right" }
-    hl.bind("SUPER + SHIFT + Page_" .. keydirs[i], hl.dsp.window.move({ workspace = prefix[i] .. "1" }), {description = "Window: Send to workspace " .. descdir[i]})
+    hl.bind("SUPER + SHIFT + Page_" .. keydirs[i], hl.dsp.window.move({ workspace = prefix[i] .. "1" }),
+        { description = "Window: Send to workspace " .. descdir[i] })
 end
 for i = 1, 4 do
     local key = { "SUPER + ALT + Page_", "CTRL + SUPER + SHIFT + " }
@@ -271,7 +285,8 @@ for i = 1, 2 do
     local keys = { "Left", "Right" }
     local prefix = { "r-", "r+" }
     local descdir = { "left", "right" }
-    hl.bind("CTRL + SUPER + " .. keys[i], hl.dsp.focus({ workspace = prefix[i] .. "1" }), {description = "Workspace: Focus " .. descdir[i]})
+    hl.bind("CTRL + SUPER + " .. keys[i], hl.dsp.focus({ workspace = prefix[i] .. "1" }),
+        { description = "Workspace: Focus " .. descdir[i] })
 end
 for i = 1, 2 do
     local keys = { "Left", "Right" }
