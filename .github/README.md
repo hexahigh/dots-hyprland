@@ -8,6 +8,48 @@
 </div>
 
 <div align="center">
+    <h2>• differences from origin •</h2>
+    <h3></h3>
+</div>
+
+This fork adds a number of features and improvements on top of the upstream illogical-impulse dotfiles:
+
+<details>
+  <summary>OpenRGB Theming Support</summary>
+
+  - Automatically applies the generated color palette to OpenRGB-compatible devices on startup
+  - Integrates with the wallpaper-based theming system so RGB lighting matches the current color scheme
+  - Adds `openrgb` to illogical-impulse-fonts-themes dependencies
+
+</details>
+
+<details>
+  <summary>GPU Screen Recorder Integration</summary>
+
+  - Integrated [gpu-screen-recorder](https://git.dec05eba.com/gpu-screen-recorder/about/) for high-performance recording
+  - Adds gpu-screen-recorder as a dependency of illogical-impulse-screencapture
+
+</details>
+
+<details>
+  <summary>Daily Chinese Word Widget</summary>
+
+  - A background widget that displays a daily Chinese word for language learning
+
+</details>
+
+<details>
+  <summary>Terminal Theming & Display Tweaks</summary>
+
+  - Splits terminal theming option into two separate settings for more granular control
+  - Fixes terminal color options
+  - Option to run a custom script on wallpaper change
+  - Option to disable the upscale notification
+
+</details>
+
+
+<div align="center">
     <h2>• overview •</h2>
     <h3></h3>
 </div>
